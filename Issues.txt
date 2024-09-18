@@ -1,0 +1,21 @@
+﻿
+Known issues:
+Giant slayer usual damage nullification is bypassed by luminite arrow afterimage and maybe some other very niche damages
+Controlled doesnt work while item is held in mouse slot, doesnt work properly on weapons with special shooting mechanisms like phantasm or stormbow either (might remove this reforge)
+Possessed hatchet doesnt have any reforges, maybe similar very unusual weapons as well, needs more testing
+Chaotic doesnt change stats midway shooting for weapons with special mechanisms like last prism and instead lock in stats it had just before start of shooting (probably impossible to fix in reasonable way)
+
+// make ranger prefix healing allies?
+
+// didnt test summoner yet 
+
+
+multiplayer:
+
+accessories not tested
+
+Boring stuff first, current issues im aware of you shouldnt report:
+Giant slayer usual damage nullification is bypassed by luminite arrow afterimage and maybe some other very niche damages
+Controlled doesnt work while item is held in mouse slot, doesnt work properly on weapons with special shooting mechanisms like phantasm or stormbow either, (remove?)
+Possessed hatchet doesnt have any reforges, maybe similar very unusual weapons as well, needs more testing. For now enable vanilla prefixes if you really want to use such weapon
+Chaotic doesnt change stats midway shooting for weapons with special mechanisms like last prism and instead lock in stats it had just before start of shooting (probably impossible to fix in reasonable way)

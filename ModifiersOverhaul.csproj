@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <!-- Import tModLoader mod properties -->
+    <Import Project="..\tModLoader.targets"/>
+
+    <!-- General -->
+    <PropertyGroup>
+
+    </PropertyGroup>
+    <ItemGroup>
+        <Folder Include="Assets\ModPrefixes\Armor\Leggings\"/>
+        <Folder Include="Assets\ModPrefixes\Hammer\"/>
+        <Folder Include="Localization\" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Remove="BalanceSheetGenerator\**"/>
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Remove="BalanceSheetGenerator\**"/>
+    </ItemGroup>
+    <ItemGroup>
+        <AdditionalFiles Remove="BalanceSheetGenerator\**"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Remove="BalanceSheetGenerator\**"/>
+    </ItemGroup>
+
+    <!-- References -->
+
+</Project>

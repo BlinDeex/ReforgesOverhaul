@@ -1,0 +1,116 @@
+This mod aims to completely replace all vanilla reforges making them a crucial aspect to your builds
+
+Even though I will list all possible reforges down below for reference, I still recommend to play with "Auto Reforge" mod,
+it lets you know what kind of reforges are available in game itself with exact numbers to cook up best builds possible
+
+Currently mod fully covers all vanilla class weapons, except throwing :( armor, accessories and even new addition, charms!
+
+By default this mod disables all vanilla prefixes (they wont disappear from weapons already having them), as they would just dilute the pool of available reforges,
+there is config option to toggle them though which doesnt require reload either. (WIP): All weapons damage is reduced by 30% and armor defense by 25% to get some space
+for reforges power and encourage player to reforge his items. Goblin tinkerer is now available since start of the game, just build a house he can move into! He will not
+sell his usual items before goblin army is defeated.
+
+Okay, so what does this mod add exactly? This is complete list of every single new reforge in the game, I will not keep track (or even mention) exact numbers as you
+can find them out in tooltips
+
+Melee weapons:
+Arcane Infused > Requires mana to use and mana sickness affects this weapon but greatly increases damage dealt
+Gigantic > Extremely increased weapon size, slightly decreased use time
+Perceptive > Extremely increased critical strike chance, chance over 100% is converted into chance to deal quadruple damage
+Titan Force > Extremely increased knockback, slightly increased damage
+Ultra Light > Extremely increased speed, moderately decreased damage, slightly decreased size, weapon is always capable of auto reuse
+Untouchable > Damage keeps ramping up as long as you dont take damage, at full power moderately increased swinging speed, when hit additional damage is lost and damage taken is multiplied depending on how ramped up weapon was
+
+Ranged weapons:
+Adaptable > Accepts any type of ammo, moderately increased firing speed, disabled for rocket launchers. Who wants to shoot bullets out of them if you can shoot rockets out of shotgun?
+Ascendant > Weapon becomes stronger the more damage you deal with it (WIP either make gun "burn out" when reaching max value or remove this reforge, little to no drawbacks for benefits)
+Challenger > Enables difficult minigame involving shooting correct color orbs giving stats which get multiplied by current score, potentially very powerful reforge
+Controlled > Modifies firing mechanism to shoot in bursts, during bursts firerate is extremely increased
+Giant Slayer > Weapon stops dealing its usual damage and instead deals very small percentage of enemy total health in true damage (displayed white, cant be reduced by defenses or resistances)
+Vampiric > Chance to heal on hit, moderately increased firing speed
+
+Magic weapons:
+Chaotic > Changes its stats wildly twice per second, including stats increasing dps 10's of times, making gun useless, damaging you or forcing to drop coins and anything in between
+Endless > Weapon requires no mana to use, moderately decreased damage
+Inverted > Weapon does not apply mana sickness anymore, now it applies mana surge which increases damage dealt, you constantly take damage while mana surge is active
+Mana Charged > Weapon deals more damage according to how full your mana bar is
+Splintering > Hits have chance to emit mana shards in random directions repeating same damage, critical strikes emit even more shards, cant hit original target
+Triple Shot > Each projectile spawns 2 more with slightly different trajectories, slightly decreased damage, extremely increased mana usage
+
+Summoner:
+Minion weapons:
+Frenzied > minions summoned by this weapon move and attack a lot faster than usual, moderately decreased damage
+
+Whips:
+Sacrificial > Hitting enemy with weapon applies buff for few seconds: upon taking lethal damage, all your minions sacrifice to keep you alive and provide invicibility time scaling with amount of minions, applies debuff for some time
+preventing you from summoning minions again, does not apply if there were no minions
+
+Accessories:
+Aerodynamic > Increased movement speed and amount of time you can use wings
+Blood Forged > Greatly increased defense, moderately decreased maximum health
+Earth Shaper > Increased mining speed
+Efficient > Decreased mana usage
+Equilibrium > Slightly increases defense, minions, movement speed, wing time, regeneration
+Fortified > Increased defense
+Lethal > Increased critical strike damage
+Revitalizing > Increased life regeneration
+Risky > Decreased defense and increased damage
+Sharpshooter > Increased critical strike chance
+Stoic > Increased defense, decreased damage
+Warlord > Increased maximum amount of minions
+
+Tools:
+Fortune(Axe) > Chance to drop additional items when cutting trees (gem trees farm might actually be worth building)
+Revealing(Pickaxe) > Chance to briefly reveal valuable things around you when tile is mined
+Vein Miner(Pickaxe) > Mines whole ore vein at once, max blocks at once mined is same as pickaxe power
+Clearing(Pickaxe, Hammer) > Mines in 3x3 area, great chance for mined tiles to not drop items
+
+Armor:
+
+There are 2 types of armor reforges:
+
+Universal > Reforge exists for all armor pieces, weaker variant out of the two but when all armor pieces with that reforge
+are equipped, you gain set bonus which can be either passive (you dont need to do anything for it to activate) or active which you activate
+with key bind. Set bonuses activation apply varying armor ability cooldown all armor reforges use, you cant "hot swap" it during battle
+to activate multiple armor bonuses
+
+Specialized > Exists only for one piece of armor, does not have set bonus but in exchange effect is stronger
+
+Headwear only:
+Water Breathing > Dramatically increases amount of time you can spend underwater before drowning
+
+Chestplate only:
+Vitalis > Increases health received from lifesteal and healing potions potency by 50%
+
+Leggings only:
+Momentum WIP > Dramatically increases movement acceleration and control in the air
+
+Universal:
+Phalanx > WIP bonus. Set bonus [passive]: Reactive plating > if projectile is about to hit you, armor shoots piece of itself to collide with it, results in explosion damaging enemies outwards.
+Armor reacts only to powerful projectiles dealing higher than certain amount of damage, or if projectile would kill you, applies long cooldown
+WIP Phoenix? (revival set bonus) maybe overused and boring
+WIP Unlimited Works/Blade Caller > swords gather behind you one by one and all fly out on activation to deal tremendous damage just cool ability where to get sword sprite tho (maybe a way to collect swords as well)
+WIP Augmented > WIP bonus: gives 1-3 buffs at 0-10-20 defense thresholds. Set bonus [passive] WIP: 2% increased damage for each buff player has
+WIP Time Binder/Chrono Forge > bonus: Increased movement speed. Set bonus [Active]: Disrupts time flow in area around you (test stuff like destroyer, what happens
+when only half of it is in range to be frozen?) resulting in enemies and all projectiles completely stopping for a few seconds,
+while time stop is active enemies and projectiles dont deal damage on contact (too op? maybe couple seconds windup time?)
+
+
+Charms are obtained by killing enemies and bosses, you can equip charm by right clicking on item while holding the charm, they come in varying tiers and shapes:
+
+Tiers: Common 2% > Rare 1% > Epic 0.5% > Legendary 0.1% > Mythical 0.02% (WIP): Pity system for legendary and mythical charms,
+guaranteed legendary charm every 1k kills and mythical every 5k. Bosses count as 10 kills at once
+
+Shapes: Round (Weapon) Square (Armor) Triangle (Accessory)
+
+You cant recover equipped charm, but you can replace it with another. Charm tier and shape is random, stats are random as well but within bounds of rolled tier
+Each tier is approximately twice as powerful as previous one
+
+
+(Active type charms? Only willing to have one key bind for them. What happens when multiple active type charms are equipped and then activated?)
+
+Charms: WIP
+
+
+
+

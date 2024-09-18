@@ -1,0 +1,86 @@
+﻿Melee:
+Arcane Infused > Requires 10 mana per swing but deals 70% increased damage, mana sickness affects this weapon
+
+Gigantic > 100% Increased weapon size but swing time is increased by 15%
+
+Perceptive > 10% decrease in base damage, 60% Increased critical strike chance, all leftover crit chance over 100% will be rolled again for quadruple damage (132% crit chance will have 32% chance to do so)
+
+Titan Force > 200% Increased knockback and 10% increased damage
+
+Ultra Light > 67% Decreased swing time, 30% decreased damage, 10% decreased size, auto reuse enabled
+
+Untouchable > Damage gradually increases and resets if you get hit, maximum 200% damage increase, reduces swing time by 20% when it reaches full power, you take additional damage equal to current damage increase (up to 3x)
+
+
+Ranged:
+Adaptable > Accepts any type of ammo, 50% increased firerate
+
+Ascendant > Gradually becomes stronger the more damage you deal with that weapon, maximum gains are 150% increased damage, 30% increased critical strike chance, (very hard to think of formula that would apply balanced requirement for any weapon, might remove)
+
+Controlled > Makes the gun shoot in bursts, tuned in a way to increase dps by around 100% (available only for automatic use weapons, sometimes does not work due to special shooting mechanisms, possibly removed soon)
+
+Vampiric > 10% Chance to get 2 health points on-hit*, 20% decreased fire rate
+
+Giant Slayer > always deal 0.02% of enemy maximum health in true damage* on-hit*, cannot crit. Normal damage does not apply. (You will always need 5k hits to kill a target)
+
+Challenger > Holding weapon in hand enables very hard minigame:
+Orbs start appearing around you with short lifetime with these colors:
+Green orb - increases total damage and defense by 2%
+Blue orb - increases total projectile velocity by 5% and critical chance by 10%
+Yellow orb - shooting it gives you both green and blue orb effects and heals you for 10hp
+Missing green blue or yellow orb reduces your score and increases when hit
+Red orb - shooting it resets your score completely, you also take 25 damage, missing this orb does nothing
+beneficial orbs have very short interval where they shine brighter than usual, hitting them during that time increases score even more,
+orb hits add their stats to the current pool collected from all the previous orbs then gets multiplied by current score which then multiplies corresponding player stat ie:
+4 green orb hits add 2% * 4 = 8% damage and defense increase to the pool, with score of 3 it becomes 24% and then both defense and damage gets multiplied by 1.24
+
+
+
+Magic:
+Endless > Weapon requires no mana to use, 33% decreased damage
+
+Mana Charged > Weapon damage increases depending on current percentage of mana available, maximum 70% increase at full mana
+
+Inverted > Replaces mana sickness with mana surge buff, works in same way except you deal more damage instead of less, you constantly take damage while it is active, maximum 50% damage increase
+
+Splintering > 20% Chance to emit mana shards in random directions on-hit* dealing same damage as projectile activating it, emits even more shards on critical hits
+Triple shot > each projectile spawned also spawns 2 additional ones, increased firing rate, decreased damage
+
+Summoner:
+
+Weapons spawning minions:
+Frenzied > minions summoned by this weapon move and attack 400% faster
+
+Weapons doing summon damage: (whips)
+WIP: Sacrificial > upon taking lethal damage, all your minions sacrifice to keep you alive, applies debuff for some time preventing you from summoning minions,
+if there were no minions summoned when you took a hit, you die as usual
+
+
+Accessory:
+Aerodynamic > Increases movement speed by 5% and maximum flight time by half a second
+
+Earth Shaper > 10% Increased mining speed
+
+Efficient > 5% Reduced mana usage
+
+Equilibrium > Provides several universal stats from other accessories at weaker strength
+
+Fortified > Increases total defense by 7%
+
+Revitalizing > Increases life regeneration by 1hp/s
+
+Risky > 10% Reduced defense, 15% Increased damage
+
+Sharpshooter > 6% Increased critical strike chance
+
+Stoic > 15% Increased defense, 8% reduced damage
+
+Warlord > Increases max minions by 0.75, rounded down, 1.5 additional minions will only let you summon 1 more minion
+
+
+on-hit* > every single hit instance, for example 1 luminite bullet piercing 10 enemies will count as 10 on-hits
+true damage* > always deals full damage bypassing enemy defenses
+
+
+
+
