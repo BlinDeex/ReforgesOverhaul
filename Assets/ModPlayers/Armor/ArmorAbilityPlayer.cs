@@ -1,6 +1,7 @@
 ﻿using System;
 using ModifiersOverhaul.Assets.Buffs;
 using ModifiersOverhaul.Assets.Misc;
+using Terraria.GameContent.UI;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 
@@ -26,7 +27,6 @@ public class ArmorAbilityPlayer : ModPlayer
     public override void ProcessTriggers(TriggersSet triggersSet)
     {
         bool activateArmor = PrefixKeybinds.ArmorActivationKeybind.JustPressed;
-
         if (activateArmor) ActivateArmorAbility();
     }
 

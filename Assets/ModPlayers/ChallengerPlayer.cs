@@ -147,7 +147,7 @@ public class ChallengerPlayer : ModPlayer
         var challengerWeaponHeld = Player.HeldItem.prefix == ModContent.PrefixType<PrefixChallenger>();
 
         if (!challengerWeaponHeld && !ChallengerModeActive) return;
-
+        
         SpawnOrb();
     }
 
@@ -177,12 +177,11 @@ public class ChallengerPlayer : ModPlayer
         var targetSpawnPos = GenerateOrbSpawnPoint(playerPos, mousePos, 90, 50f, 100f);
         if (Main.netMode is NetmodeID.SinglePlayer or NetmodeID.Server)
         {
-            NPC challengerOrb = NPC.NewNPCDirect(null, (int)targetSpawnPos.X, (int)targetSpawnPos.Y, ModContent.NPCType<ChallengerOrb>());
+            NPC challengerOrb = NPC.NewNPCDirect(new EntitySource_Misc("ChallengerOrbSpawn"), (int)targetSpawnPos.X, (int)targetSpawnPos.Y, ModContent.NPCType<ChallengerOrb>());
             PrefixGlobalNPC prefixGlobalNpc = challengerOrb.GetGlobalNPC<PrefixGlobalNPC>();
             int challengerOrbOwner = prefixGlobalNpc.ChallengerOwner;
             prefixGlobalNpc.ChallengerOwner = Player.whoAmI;
         }
-
         ticksUntilChallengerOrbSpawn = PrefixBalance.GetChallengerSpawnRate(ChallengerScore);
     }
 

@@ -38,4 +38,9 @@ public class PrefixGlobalItem : GlobalItem
             Main.item[bonusItem].GetGlobalItem<InstancedGlobalItem>().FortuneDrop = true;
         }
     }
+
+    public override bool CanEquipAccessory(Item item, Player player, int slot, bool modded)
+    {
+        return !item.IsArmor();
+    }
 }

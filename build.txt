@@ -1,3 +1,5 @@
-displayName = Modifiers Overhaul
+displayName = Reforges Overhaul
 author = BlinDeex
 version = 0.1
+includeSource = true
+//buildIgnore = Assets/DEBUG/*

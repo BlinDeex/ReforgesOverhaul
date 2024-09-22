@@ -27,5 +27,7 @@ public enum ChallengerOrbType
 public enum MessageType
 {
     ChallengerScore,
-    TrueDamageText
+    TrueDamageText,
+    TimeStop,
+    CharmOnKilled
 }

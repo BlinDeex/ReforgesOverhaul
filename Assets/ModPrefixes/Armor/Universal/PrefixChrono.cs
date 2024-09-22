@@ -48,7 +48,7 @@ public class PrefixChrono : ModPrefix, ISpecializedPrefix
         
         
         var newLine2 = new TooltipLine(Mod, "newLine2",
-            SetBonus.Format(MathF.Round((int)(PrefixBalance.CHRONO_ABILITY_LENGTH / 60f))))
+            SetBonus.Format(Math.Round(PrefixBalance.CHRONO_ABILITY_LENGTH / 60f, 1)))
         {
             IsModifier = true,
             IsModifierBad = !setBonusActive

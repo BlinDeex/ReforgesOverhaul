@@ -11,12 +11,7 @@ public class GlobalProjectilePrefix : GlobalProjectile
 {
     public override void OnSpawn(Projectile projectile, IEntitySource source)
     {
-        //if (projectile.owner != Main.myPlayer) return;
-        if (!projectile.TryGetGlobalProjectile(out InstancedProjectilePrefix projPrefix))
-        {
-            UtilMethods.LogError($"Failed to get {nameof(InstancedProjectilePrefix)}", 001);
-            return;
-        }
+        InstancedProjectilePrefix projPrefix = projectile.GetGlobalProjectile<InstancedProjectilePrefix>();
 
         if (source is IEntitySource_WithStatsFromItem itemUsed)
         {
@@ -36,34 +31,31 @@ public class GlobalProjectilePrefix : GlobalProjectile
     public override bool PreAI(Projectile projectile)
     {
         InstancedProjectilePrefix projPrefix = projectile.GetGlobalProjectile<InstancedProjectilePrefix>();
+        bool runPreAI = true;
         
-        if (projPrefix.Tracer)
+        RangedProjectile.TracerPreAI(projectile, projPrefix, ref runPreAI);
+        TimeStop(projPrefix, projectile, ref runPreAI);
+        return runPreAI;
+    }
+
+    private void TimeStop(InstancedProjectilePrefix projPrefix, Projectile projectile, ref bool runAI)
+    {
+        if (!projPrefix.TimeStop) return;
+       
+        projectile.position = projectile.oldPosition;
+        projectile.timeLeft++;
+        
+        projPrefix.TimeStopTicks--;
+
+        if (projPrefix.TimeStopTicks > 0)
         {
-            RangedProjectile.TracerPreAI(projectile, projPrefix);
-            return true;
+            runAI = false;
+            return;
         }
-        
-        if (projPrefix.TimeStop)
-        {
-            if (!projPrefix.TimeStopVelocity.HasValue)
-            {
-                projPrefix.TimeStopVelocity = projectile.velocity;
-            }
             
-            projPrefix.TimeStopTicks--;
-            projectile.velocity = Vector2.Zero;
-            
-            if (projPrefix.TimeStopTicks <= 0)
-            {
-                projPrefix.TimeStop = false;
-                projectile.velocity = projPrefix.TimeStopVelocity.Value;
-                projPrefix.TimeStopVelocity = null;
-                return false;
-            }
-            return false;
-        }
-        
-        return true;
+        projPrefix.TimeStop = false;
+        projectile.netUpdate = true;
+        runAI = false;
     }
     
     

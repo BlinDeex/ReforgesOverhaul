@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace ModifiersOverhaul.Assets.InstancedGlobalItems;
 
@@ -18,7 +21,7 @@ public class InstancedProjectilePrefix : GlobalProjectile
     /// Used for minions by frenzied prefix
     /// </summary>
     public bool Frenzied { get; set; }
-
+    
     public bool AdaptableSwapped { get; set; }
 
     public int AmmoTypeUsed { get; set; } = -1;
@@ -28,13 +31,25 @@ public class InstancedProjectilePrefix : GlobalProjectile
     
     public bool TimeStop { get; set; }
     public int TimeStopTicks { get; set; }
-    public Vector2? TimeStopVelocity { get; set; } = null;
-    public float[] TimeStopAI = null;
 
-    public void ActivateTimeStop(int ticks, Projectile proj)
+    public void ActivateTimeStop(int ticks, Projectile proj) // called on server/singleplayer only
     {
-        TimeStop = true;
-        TimeStopTicks = ticks * proj.extraUpdates + 1;
-        TimeStopAI = proj.ai;
+        if (Main.projHook[proj.type]) return;
+        TimeStop = true; // used in another GlobalProjectile inside PreAI
+        TimeStopTicks = ticks * proj.extraUpdates + 1; // used in another GlobalProjectile inside PreAI
+        //proj.netUpdate = true; // some weird desync issues, projectile still moving then teleporting back and moving again when timestop ends
+        NetMessage.SendData(MessageID.SyncProjectile, number: proj.identity); // works perfectly
+    }
+
+    public override void SendExtraAI(Projectile projectile, BitWriter bitWriter, BinaryWriter binaryWriter)
+    {
+        bitWriter.WriteBit(TimeStop);
+        binaryWriter.Write(TimeStopTicks);
+    }
+
+    public override void ReceiveExtraAI(Projectile projectile, BitReader bitReader, BinaryReader binaryReader)
+    {
+        TimeStop = bitReader.ReadBit();
+        TimeStopTicks = binaryReader.ReadInt32();
     }
 }

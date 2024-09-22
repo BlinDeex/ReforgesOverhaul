@@ -1,15 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using ModifiersOverhaul.Assets.CharmsModule;
 
 namespace ModifiersOverhaul.Assets.ModPlayers;
 
 public class GeneralStatPlayer : ModPlayer
 {
-    private float additionalMinions;
+    public Dictionary<CharmStat, (Func<float> Getter, Action<float> Setter)> StatAccessors { get; private set; }
 
+    public GeneralStatPlayer()
+    {
+        StatAccessors = new Dictionary<CharmStat, (Func<float> Getter, Action<float> Setter)>()
+        {
+            { CharmStat.LifeSteal, (() => Lifesteal, value => Lifesteal = value) },
+            { CharmStat.HealingMul, (() => HealingMul, value => HealingMul = value) },
+            { CharmStat.CritDamage, (() => CritDamageMul, value => CritDamageMul = value) },
+            { CharmStat.ManaUsage, (() => ManaUsageMul, value => ManaUsageMul = value) },
+            { CharmStat.UseSpeed, (() => UseTimeMul, value => UseTimeMul = value) },
+            { CharmStat.MoveSpeed, (() => MovementSpeedMul, value => MovementSpeedMul = value) },
+            { CharmStat.WingTime, (() => WingTime, value => WingTime = (int)value) },
+            { CharmStat.MaxHealthMul, (() => MaxHealthMul, value => MaxHealthMul = value) },
+            { CharmStat.Crit, (() => CritMul, value => CritMul = value) },
+            { CharmStat.Damage, (() => DamageMul, value => DamageMul = value) },
+            { CharmStat.PickSpeed, (() => PickSpeedMul, value => PickSpeedMul = value) },
+            { CharmStat.MeleeDamage, (() => MeleeDamageMul, value => MeleeDamageMul = value) },
+            { CharmStat.RangedDamage, (() => RangedDamageMul, value => RangedDamageMul = value) },
+            { CharmStat.MagicDamage, (() => MagicDamageMul, value => MagicDamageMul = value) },
+            { CharmStat.SummonDamage, (() => SummonDamageMul, value => SummonDamageMul = value) },
+        };
+    }
+    
+    private float additionalMinions;
     public float AdditionalMinions // lmao
     {
         get => additionalMinions;
@@ -24,42 +49,36 @@ public class GeneralStatPlayer : ModPlayer
             additionalMinions = value;
         }
     }
-
     /// <summary>
-    /// 0.4 lifesteal would have 40% chance to steal 1hp, 2.3 would have 100% chance to steal 2hp and 30% chance for 1hp, inverted for negatives
+    /// 0.4 lifesteal would have 40% chance to steal 1hp, 2.3 would have 100% chance to steal 2hp and 30% chance for 1hp, if negative hurts player instead
     /// </summary>
     public float Lifesteal { get; set; }
-
     public float HealingMul { get; set; } = 1f;
-    
-
     public float CritDamageMul { get; set; }
-
     public float ManaUsageMul { get; set; }
-
     public float UseTimeMul { get; set; }
-
     public float CoinDropValue { get; set; }
     public float CoinDropValueMul { get; set; }
-
     public int Regen { get; set; }
-
-    public float MovementSpeedMul { get; set; }
+    public float MovementSpeedMul { get; set; } = 1f;
     public int WingTime { get; set; }
-
     private float maxHealthMul = 1f;
-
     public float MaxHealthMul
     {
         get => maxHealthMul;
         set => maxHealthMul = value > 0 ? value : 0.01f;
     }
 
+    public float CritMul { get; set; } = 1f;
     public float Crit { get; set; }
+    public float DamageMul { get; set; } = 1f;
+    public float MeleeDamageMul { get; set; }
+    public float RangedDamageMul { get; set; } = 1f;
+    public float MagicDamageMul { get; set; } = 1f;
+    public float SummonDamageMul { get; set; } = 1f;
 
-    public float DamageMul { get; set; }
 
-    public float PickSpeedMul { get; set; }
+    public float PickSpeedMul { get; set; } = 1f;
     private float defenseMul;
 
     private int invincibilityTicks;
@@ -77,9 +96,6 @@ public class GeneralStatPlayer : ModPlayer
     {
         HealingMul += value - 1;
     }
-    
-    
-
     public float MaxHealthDMG { get; set; } //TODO: implement
 
     public override void ResetEffects()
@@ -87,25 +103,30 @@ public class GeneralStatPlayer : ModPlayer
         Player.maxMinions -= (int)AdditionalMinions;
         AdditionalMinions = 0;
 
-        PickSpeedMul = 1;
-        ManaUsageMul = 1;
-        UseTimeMul = 1;
-        CoinDropValue = 0;
-        CoinDropValueMul = 1;
-        Lifesteal = 0;
-        HealingMul = 1;
+        PickSpeedMul = 1f;
+        ManaUsageMul = 1f;
+        UseTimeMul = 1f;
+        CoinDropValue = 0f;
+        CoinDropValueMul = 1f;
+        Lifesteal = 0f;
+        HealingMul = 1f;
         Regen = 0;
-        MovementSpeedMul = 1;
+        MovementSpeedMul = 1f;
         WingTime = 0;
-        MaxHealthMul = 1;
-        Crit = 0;
-        DamageMul = 1;
-        DefenseMul = 1;
-        MaxHealthDMG = 0;
-        CritDamageMul = 1;
+        MaxHealthMul = 1f;
+        Crit = 0f;
+        DamageMul = 1f;
+        DefenseMul = 1f;
+        MaxHealthDMG = 0f;
+        CritDamageMul = 1f;
+        CritMul = 1f;
+        MeleeDamageMul = 1f;
+        RangedDamageMul = 1f;
+        MagicDamageMul = 1f;
+        SummonDamageMul = 1f;
+
         invincibilityTicks--;
     }
-
     public override void UpdateLifeRegen()
     {
         Player.lifeRegen += Regen;
@@ -135,7 +156,6 @@ public class GeneralStatPlayer : ModPlayer
     private void RunLifesteal(Entity victim, Vector2 hitPos)
     {
         float currentLifeSteal = Lifesteal * HealingMul;
-        
         var isNegative = currentLifeSteal < 0;
         var lifestealAbs = Math.Abs(currentLifeSteal);
         var fullLifesteals = (int)lifestealAbs;
@@ -168,21 +188,50 @@ public class GeneralStatPlayer : ModPlayer
     public override void PostUpdateEquips()
     {
         Player.wingTimeMax += WingTime;
-        Player.moveSpeed *= MovementSpeedMul;
         Player.GetDamage<GenericDamageClass>() *= DamageMul;
+        Player.GetDamage<MeleeDamageClass>() *= MeleeDamageMul;
+        Player.GetDamage<RangedDamageClass>() *= RangedDamageMul;
+        Player.GetDamage<MagicDamageClass>() *= MagicDamageMul;
+        Player.GetDamage<SummonDamageClass>() *= SummonDamageMul;
         Player.statDefense.FinalMultiplier *= defenseMul;
-        Player.pickSpeed *= PickSpeedMul;
+        Player.pickSpeed = CalculateMiningSpeed(Player.pickSpeed, PickSpeedMul);
+    }
+    
+    private static float CalculateMiningSpeed(float baseSpeed, float speedMul)
+    {
+        float finalSpeed = baseSpeed / speedMul;
+        if (finalSpeed <= 0) finalSpeed = 0.01f;
+        return finalSpeed;
+    }
+
+    public override void PostUpdateRunSpeeds()
+    {
+        Player.accRunSpeed *= MovementSpeedMul;
+        Player.maxRunSpeed *= MovementSpeedMul;
+        Player.runAcceleration *= MovementSpeedMul;
+    }
+
+    public void ApplyCharmStats(List<CharmRoll> rolls)
+    {
+        foreach (var roll in rolls)
+        {
+            if (StatAccessors.TryGetValue(roll.Stat, out var accessor))
+            {
+                if(roll.Stat == CharmStat.MoveSpeed) Main.NewText(roll.RawStrength);
+                accessor.Setter(accessor.Getter.Invoke() + roll.RawStrength);
+            }
+        }
     }
 
     public override void ModifyWeaponCrit(Item item, ref float crit)
     {
         crit += Crit;
+        crit *= CritMul;
     }
 
     public override void ModifyManaCost(Item item, ref float reduce, ref float mult)
     {
         mult *= Math.Clamp(ManaUsageMul, 0, 10);
-        
     }
 
     public override void GetHealLife(Item item, bool quickHeal, ref int healValue)

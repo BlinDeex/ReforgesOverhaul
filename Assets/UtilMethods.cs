@@ -4,6 +4,8 @@ using System.Globalization;
 using Microsoft.Xna.Framework;
 using ModifiersOverhaul.Assets.Balance;
 using Terraria;
+using Terraria.Chat;
+using Terraria.Localization;
 using Terraria.Utilities;
 
 namespace ModifiersOverhaul.Assets;
@@ -25,6 +27,48 @@ public static class UtilMethods
     public static bool IsArmor(this Item item)
     {
         return item.headSlot != -1 || item.bodySlot != -1 || item.legSlot != -1;
+    }
+    
+    public static void BroadcastOrNewText(string message, Color color)
+    {
+        if (Main.dedServ)
+        {
+            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(message), color);
+            return;
+        }
+        
+        Main.NewText(message, color);
+    }
+    
+    public static byte[] IntListToByteArray(List<int> intList)
+    {
+        byte[] byteArray = new byte[intList.Count * 4];
+
+        for (int i = 0; i < intList.Count; i++)
+        {
+            byte[] bytes = BitConverter.GetBytes(intList[i]);
+            Buffer.BlockCopy(bytes, 0, byteArray, i * 4, 4);
+        }
+
+        return byteArray;
+    }
+    
+    public static Vector3 ColorToVector3(this Color color)
+    {
+        return new Vector3(color.R, color.G, color.B);
+    }
+    
+    public static List<int> ByteArrayToIntList(byte[] byteArray)
+    {
+        List<int> intList = [];
+
+        for (int i = 0; i < byteArray.Length; i += 4)
+        {
+            int value = BitConverter.ToInt32(byteArray, i);
+            intList.Add(value);
+        }
+
+        return intList;
     }
 
     public static List<Point> GetConnectedTiles(int startX, int startY, int maxTiles)

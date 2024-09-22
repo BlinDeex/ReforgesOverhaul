@@ -6,6 +6,7 @@ using ModifiersOverhaul.Assets.Buffs;
 using ModifiersOverhaul.Assets.Projectiles;
 using Terraria;
 using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ModifiersOverhaul.Assets.ModPlayers.Armor;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using ModifiersOverhaul.Assets.CharmsModule;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -16,6 +17,13 @@ public static class LocalizationManager
     private const string tool = "Tool.";
     private const string whip = "Whip.";
     private const string minionWeapon = "MinionWeapon.";
+    private const string charm = "Charms.";
+    private const string common = "Common.";
+    private const string rare = "Rare.";
+    private const string epic = "Epic.";
+    private const string legendary = "Legendary.";
+    private const string mythical = "Mythical.";
+    private const string notInitialized = "notInitialized";
     
     private static SpecializedPrefixType armorFlags = SpecializedPrefixType.Headwear | SpecializedPrefixType.Chestplate |
                                                       SpecializedPrefixType.Leggings;
@@ -125,6 +133,25 @@ public static class LocalizationManager
         }
         
         throw new Exception("GetNotSpecializedText reached end");
+    }
+
+    public static LocalizedText GetCharmText(CharmStat stat)
+    {
+        StringBuilder sb = new();
+        sb.Append(charm);
+        CharmRarity statRarity = CharmBalance.GetStatRarity(stat);
+        sb.Append(statRarity switch
+        {
+            CharmRarity.Common => common,
+            CharmRarity.Rare => rare,
+            CharmRarity.Epic => epic,
+            CharmRarity.Legendary => legendary,
+            CharmRarity.Mythical => mythical,
+            _ => notInitialized
+        });
+        sb.Append(stat.ToString());
+
+        return ModifiersOverhaul.Instance.GetLocalization(sb.ToString());
     }
 
     private static LocalizedText GetLocalizedText(string path)

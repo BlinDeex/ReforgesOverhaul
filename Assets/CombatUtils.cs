@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
+using Terraria.ModLoader;
 
 namespace ModifiersOverhaul.Assets;
 
@@ -106,6 +107,34 @@ public static class CombatUtils
         var rotatedVelocityNegative = UtilMethods.RotateVector(velocity, -radians2);
 
         return (rotatedVelocityPositive, rotatedVelocityNegative);
+    }
+
+    public static bool TryFindSegments(NPC npc, out List<NPC> segments)
+    {
+        segments = [];
+        int targetNpcRealLife = npc.realLife;
+        
+        foreach (NPC testNpc in Main.ActiveNPCs)
+        {
+            int testNpcRealLife = testNpc.realLife;
+            
+            if (testNpcRealLife != targetNpcRealLife) continue;
+            
+            segments.Add(testNpc);
+        }
+
+        if (segments.Count <= 0) return false;
+        
+        segments.Add(Main.npc[npc.realLife]);
+        return true;
+    }
+
+    public static bool IsWeapon(this Item item)
+    {
+        bool isPickaxe = item.pick > 0;
+        bool isAxe = item.axe > 0;
+        bool isHammer = item.hammer > 0;
+        return item.damage > 0 && !isPickaxe && !isAxe && !isHammer;
     }
 
     private static void TryMergeCoins(Vector2 rootCoinPos, int coinType)

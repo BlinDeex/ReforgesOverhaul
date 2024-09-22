@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using ModifiersOverhaul.Assets.Balance;
 using ModifiersOverhaul.Assets.Misc;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -33,7 +36,7 @@ public class PrefixTracer : ModPrefix
         {
             IsModifier = true
         };
-
+        
         yield return newLine;
     }
 

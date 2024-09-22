@@ -54,9 +54,9 @@ public class RangedProjectile : GlobalProjectile
     private void PrefixGiantSlayer(NPC target, ref NPC.HitModifiers modifiers, InstancedProjectilePrefix projPrefix)
     {
         if (projPrefix.GunPrefixType != ModContent.PrefixType<PrefixGiantSlayer>()) return;
-        
 
-        var targetDamage = target.lifeMax * PrefixBalance.GIANT_SLAYER_PERCENT_DAMAGE;
+        NPC realTarget = target.realLife != -1 ? Main.npc[target.realLife] : target;
+        var targetDamage = realTarget.lifeMax * PrefixBalance.GIANT_SLAYER_PERCENT_DAMAGE;
 
         WeaponUtils.DealTrueDamage(target, ref modifiers, targetDamage, true);
     }
@@ -75,8 +75,9 @@ public class RangedProjectile : GlobalProjectile
         projectile.timeLeft = PrefixBalance.TRACER_MAXIMUM_LIFETIME;
     }
 
-    public static void TracerPreAI(Projectile projectile, InstancedProjectilePrefix projPrefix)
+    public static void TracerPreAI(Projectile projectile, InstancedProjectilePrefix projPrefix, ref bool runAI)
     {
+        if (projPrefix.GunPrefixType != ModContent.PrefixType<PrefixTracer>()) return;
         if (projectile.timeLeft % PrefixBalance.TRACER_PATH_RESOLUTION != 0) return;
         
         projPrefix.TracerPathPoints.Add(projectile.position);

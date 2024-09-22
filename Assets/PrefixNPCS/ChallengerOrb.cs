@@ -134,7 +134,7 @@ public class ChallengerOrb : ModNPC
             NPC.active = false;
             return;
         }
-
+        
         var ownerPos = owner.Center;
         MoveOrb(ownerPos);
         Effects();
@@ -268,7 +268,7 @@ public class ChallengerOrb : ModNPC
         var wiggleVelocity = new Vector2(wiggleX, wiggleY);
 
         var totalVelocity = moveAwayVelocity + wiggleVelocity;
-
+        
         if (NPC.frameCounter >= FRAME_COUNT / 2f)
         {
             var upwardSpeedMultiplier = (float)(NPC.frameCounter - FRAME_COUNT / 2f) / (FRAME_COUNT / 2f);

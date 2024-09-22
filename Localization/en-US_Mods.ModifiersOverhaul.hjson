@@ -107,16 +107,20 @@ Armor: {
 		Phalanx: {
 			SetBonus:
 				'''
-				SET BONUS: Reactive armor plating, detects powerful projectiles around you and shoots piece of itself
+				SET BONUS [Passive]: Reactive armor plating, detects powerful projectiles around you and shoots piece of itself
 				to collide with them, results in explosion damaging enemies outwards. Applies {0} {^0:second;seconds} armor ability cooldown
 				'''
 			DisplayName: Phalanx
 		}
 
 		Chrono: {
-			SetBonus: Mods.ModifiersOverhaul.Armor.Universal.Chrono.SetBonus
-			Desc: Mods.ModifiersOverhaul.Armor.Universal.Chrono.Desc
-			DisplayName: Mods.ModifiersOverhaul.Armor.Universal.Chrono.DisplayName
+			SetBonus:
+				'''
+				SET BONUS [Active]: Disrupts time flow in area around you resulting in enemies and all projectiles
+				completely stopping for {0} {^0:second;seconds}, while time stop is active enemies dont deal damage on contact
+				'''
+			Desc: "{0}% Increased movement speed"
+			DisplayName: Chrono
 		}
 	}
 }
@@ -299,3 +303,40 @@ Configs: {
 }
 
 Keybinds.ArmorActivationKeybind.DisplayName: Armor Activation Keybind
+
+Items: {
+	Charm: {
+		DisplayName: Charm
+		Tooltip: ""
+	}
+}
+
+Charms: {
+	notInitializedNotInitialized: Not Initialized
+
+	Rare: {
+		Damage: "{0}% Increased damage"
+		WingTime: Wing time increased by {0} {^0:tick;ticks}
+		UseSpeed: "{0}% Increased using speed"
+		ManaUsage: "{0}% Decreased mana usage"
+		Regen: "{0}hp/s Increased life regeneration"
+	}
+
+	Common: {
+		MeleeDamage: "{0}% Increased melee damage"
+		RangedDamage: "{0}% Increased ranged damage"
+		MagicDamage: "{0}% Increased magic damage"
+		SummonDamage: "{0}% Increased summon damage"
+		MoveSpeed: "{0}% Increased movement speed"
+		CharmLuck: "{0}% Increased charm luck"
+		PickSpeed: "{0}% Increased mining speed"
+		Crit: "{0}% Increased critical strike chance"
+	}
+
+	Epic: {
+		LifeSteal: "{0} Increased lifesteal"
+		CritDamage: "{0}% Increased critical strike damage"
+		HealingMul: "{0}% Increased lifesteal and health potions potency"
+		MaxHealthMul: "{0}% Increased maximum health"
+	}
+}

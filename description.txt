@@ -78,6 +78,7 @@ Specialized > Exists only for one piece of armor, does not have set bonus but in
 
 Headwear only:
 Water Breathing > Dramatically increases amount of time you can spend underwater before drowning
+Aware WIP > Shows all stats gained by armors accessories and whatnot
 
 Chestplate only:
 Vitalis > Increases health received from lifesteal and healing potions potency by 50%
@@ -87,7 +88,7 @@ Momentum WIP > Dramatically increases movement acceleration and control in the a
 
 Universal:
 Phalanx > WIP bonus. Set bonus [passive]: Reactive plating > if projectile is about to hit you, armor shoots piece of itself to collide with it, results in explosion damaging enemies outwards.
-Armor reacts only to powerful projectiles dealing higher than certain amount of damage, or if projectile would kill you, applies long cooldown
+Armor reacts only to powerful projectiles dealing higher than certain amount of damage, or if projectile would kill you, applies long cooldown (slightly reduce defense while on cd?)
 WIP Phoenix? (revival set bonus) maybe overused and boring
 WIP Unlimited Works/Blade Caller > swords gather behind you one by one and all fly out on activation to deal tremendous damage just cool ability where to get sword sprite tho (maybe a way to collect swords as well)
 WIP Augmented > WIP bonus: gives 1-3 buffs at 0-10-20 defense thresholds. Set bonus [passive] WIP: 2% increased damage for each buff player has
@@ -101,15 +102,31 @@ Charms are obtained by killing enemies and bosses, you can equip charm by right 
 Tiers: Common 2% > Rare 1% > Epic 0.5% > Legendary 0.1% > Mythical 0.02% (WIP): Pity system for legendary and mythical charms,
 guaranteed legendary charm every 1k kills and mythical every 5k. Bosses count as 10 kills at once
 
-Shapes: Round (Weapon) Square (Armor) Triangle (Accessory)
+Shapes: Circle (Weapon) Square (Armor) Triangle (Accessory)
 
 You cant recover equipped charm, but you can replace it with another. Charm tier and shape is random, stats are random as well but within bounds of rolled tier
-Each tier is approximately twice as powerful as previous one
+Each tier is more powerful than previous one
 
 
 (Active type charms? Only willing to have one key bind for them. What happens when multiple active type charms are equipped and then activated?)
 
-Charms: WIP
+Issues:
+Rare server crash when spawning a lot of charms in host & play mode (atleast cant get it to crash while launching server in debug mode from ide)
+when "saving modded data" I think it happens in Charm class
+
+Controlled doesnt work while in mouse slot cause HoldItem doesnt run, I tried several hooks and variations how to interrupt shooting even of special mechanism weapons
+like phantasm but to no avail, I can try to move logic somewhere outside GlobalItem but thats annoying
+
+ModifiedTileBreaking must be changed into some other solution cause it will probably break at first occurence of another mod detouring/il editing (maybe, at the time of 
+writing I cant get full picture of wtf I did there easy enough)
+
+
+
+
+
+
+
+Augmentations??
 
 
 

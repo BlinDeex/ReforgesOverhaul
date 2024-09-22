@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 
 namespace ModifiersOverhaul.Assets.Balance;
 
@@ -304,6 +306,30 @@ public static class PrefixBalance
     public static int CHRONO_ABILITY_COOLDOWN = 60 * 8;
     public static float CHRONO_ABILITY_RANGE = 400000f;
     public static int CHRONO_ABILITY_LENGTH = 60 * 7;
+    
+    // Augmented
+    public static Dictionary<int, int> AUGMENTED_HELMET_THRESHOLDS_AND_BUFFS = new()
+    {
+        {10, BuffID.Hunter},
+        {20, BuffID.WellFed3},
+        {30, BuffID.Lifeforce}
+    };
+    
+    public static Dictionary<int, int> AUGMENTED_CHESTPLATE_THRESHOLDS_AND_BUFFS = new()
+    {
+        {10, BuffID.Ironskin},
+        {20, BuffID.Wrath},
+        {30, BuffID.Endurance}
+    };
+    
+    public static Dictionary<int, int> AUGMENTED_LEGGINGS_THRESHOLDS_AND_BUFFS = new()
+    {
+        {10, BuffID.Swiftness},
+        {20, BuffID.Rage},
+        {30, BuffID.Gravitation}
+    };
+
+    public static float AUGMENTED_SET_BONUS_DAMAGE_PER_BUFF = 0.02f;
     
     #endregion
 

@@ -1,7 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using System.IO;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace ModifiersOverhaul.Assets.Misc;
 
@@ -10,9 +13,6 @@ public class PrefixGlobalNPC : GlobalNPC
     public override bool InstancePerEntity => true;
     
     public int ChallengerOwner { get; set; }
-
-    private int frameHeightAtTimeStop;
-    private bool initiateTimeStop;
     private int timeStopTicks;
     private bool timeStopActive;
     
@@ -27,50 +27,55 @@ public class PrefixGlobalNPC : GlobalNPC
 
     private void TickTimeStop(ref bool runAI, NPC npc)
     {
-        if (initiateTimeStop)
-        {
-            initiateTimeStop = false;
-            timeStopActive = true;
-            runAI = false;
-
-            frameHeightAtTimeStop = npc.frame.Y;
-            
-            return;
-        }
-
         if (!timeStopActive) return;
         
         if (timeStopTicks <= 0)
         {
             timeStopActive = false;
+            npc.netUpdate = true;
             return;
         }
         
+        npc.position = npc.oldPosition;
+        npc.direction = npc.oldDirection;
         npc.velocity = Vector2.Zero;
-        npc.GravityMultiplier *= 0f;
+        npc.frameCounter = 0.0;
+        npc.aiAction = 0;
+        npc.timeLeft++;
 
         timeStopTicks--;
 
         runAI = false;
     }
 
-    public void TimeStop(int ticks)
+    public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
     {
-        initiateTimeStop = true;
+        bitWriter.WriteBit(timeStopActive);
+        binaryWriter.Write(timeStopTicks);
+    }
+
+    public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+    {
+        timeStopActive = bitReader.ReadBit();
+        timeStopTicks = binaryReader.ReadInt32();
+    }
+
+    public void TimeStop(int ticks, NPC npc)
+    {
+        if (timeStopActive) return;
+        
         timeStopTicks = ticks;
-    }
+        timeStopActive = true;
+        npc.netUpdate = true;
 
-    public override void FindFrame(NPC npc, int frameHeight)
-    {
-        if (timeStopActive)
+        if (!CombatUtils.TryFindSegments(npc, out List<NPC> segments)) return;
+        
+        foreach (NPC segment in segments)
         {
-            npc.frame = new Rectangle(npc.frame.X, frameHeightAtTimeStop, npc.frame.Width, npc.frame.Height);
-            return;
+            segment.GetGlobalNPC<PrefixGlobalNPC>().TimeStop(ticks, segment);
         }
-
-        base.FindFrame(npc, frameHeight);
     }
-
+    
     public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
     {
         // ReSharper disable once ReplaceWithSingleAssignment.True
